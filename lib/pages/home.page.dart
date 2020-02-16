@@ -62,10 +62,7 @@ class _HomePageState extends State<HomePage> {
     var precoml1 = int.parse(_unitCtrl.text.replaceAll(new RegExp(r'[,.]'), '',));
     var precoml2 = int.parse(_unitCtrl1.text.replaceAll(new RegExp(r'[,.]'), '',));
 
-    //totp1 = double.parse(_precoCtrl.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12 as int;
-    //totp2 = double.parse(_precoCtrl1.text.replaceAll(new RegExp(r'[,.]'), '',))* 12 as int;
-    //totmlp1 = double.parse(_unitCtrl.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12 as int;
-    //totmlp2 = double.parse(_unitCtrl1.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12 as int;
+
 
     
 
