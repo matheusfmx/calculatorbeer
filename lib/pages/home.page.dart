@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage> {
   Future calculate() {
     var totp1 =  double.parse(_precoCtrl.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12;
     var totp2 = double.parse(_precoCtrl1.text.replaceAll(new RegExp(r'[,.]'), '',))* 12;
-    var totmlp1 = int.parse(_unitCtrl.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12;
-    var totmlp2 = int.parse(_unitCtrl1.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12;
+    var totmlp1 = double.parse(_unitCtrl.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12;
+    var totmlp2 = double.parse(_unitCtrl1.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12;
     var difvalor = 0.0;
     var latas = 0.0;
     var litros = 0.0;
@@ -67,6 +67,8 @@ class _HomePageState extends State<HomePage> {
     //totmlp1 = double.parse(_unitCtrl.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12 as int;
     //totmlp2 = double.parse(_unitCtrl1.text.replaceAll(new RegExp(r'[,.]'), '',)) * 12 as int;
 
+    
+
     setState(() {
       _completed = false;
       _busy = true;
@@ -76,10 +78,10 @@ class _HomePageState extends State<HomePage> {
       setState(
         () {
           if (totp1 > totp2) {
-            difvalor = (totp1 - totp2);
-            latas = (difvalor / precoml2) ;
-            litros = latas * precounit2;
-            totlitros = litros + totmlp1;
+            difvalor = totp1 - totp2;
+            latas = difvalor / precounit2;
+            litros = latas * precoml2;
+            totlitros = litros + totmlp2;
             diflitros = totlitros - totmlp1;
             
             if (diflitros > 0) {
@@ -97,27 +99,25 @@ class _HomePageState extends State<HomePage> {
             _resultText =
                 'Levando '+ latas.toStringAsFixed(0)+' do Produto 2, fica o mesmo preço que levar a Produto 1 e não há nenhuma diferença de ML';
           }
+
           } else {
             difvalor = (totp2 - totp1);
-            latas = (difvalor / precoml1);
-            litros = latas * precounit1;
-            totlitros = litros + totmlp2;
-            diflitros = totlitros - totmlp1;
+            latas = (difvalor / precounit1);
+            litros = latas * precoml1;
+            totlitros = litros + totmlp1;
+            diflitros = totlitros - totmlp2;
           }
 
             if (diflitros > 0) {
-          _resultText1 = 'Produto 1';
           _resultText =
                 ('Comprando mais '+ latas.toStringAsFixed(0) +
                         ' unidades do Produto 1, sairá o mesmo preço que o Produto 2. Porém levando o Produto 1 você vai ganhar ' +
                     diflitros.toStringAsFixed(0) +
                     ' ml a mais!');
-                    _resultText1 = 'Produto 1';
           } else if (diflitros < 0)
             _resultText = 'Pelo mesmo preço você leva ' + latas.toStringAsFixed(0)+
                 ' unidades do Produto 2. Porém levando o Produto 1, você ganhará '+diflitros.toStringAsFixed(0)+' ml a mais!';
           else if (diflitros == 0) {
-            _resultText1 = 'Produto 1';
             _resultText =
                 'Levando '+ latas.toStringAsFixed(0)+' unidades do Produto 1, fica o mesmo preço que levar o Produto 2 e não há nenhuma diferença de ML';
           }
