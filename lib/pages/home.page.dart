@@ -67,11 +67,12 @@ class _HomePageState extends State<HomePage> {
           '',
         )) *
         12;
+    var real = 12;
     var difvalor = 0.0;
     var latas = 0.0;
     var litros = 0.0;
     var totlitros = 0.0;
-    var diflitros = 0.0;
+    var diflitros = 0.0.abs();
     var precounit1 = int.parse(_precoCtrl.text.replaceAll(
       new RegExp(r'[,.]'),
       '',
@@ -84,10 +85,12 @@ class _HomePageState extends State<HomePage> {
       new RegExp(r'[,.]'),
       '',
     ));
-    var precoml2 = int.parse(_unitCtrl1.text.replaceAll(
-      new RegExp(r'[,.]'),
-      '',
-    ));
+    var precoml2 = int.parse(
+      _unitCtrl1.text.replaceAll(
+        new RegExp(r'[,.]'),
+        '',
+      ),
+    );
 
     setState(() {
       _completed = false;
@@ -100,24 +103,24 @@ class _HomePageState extends State<HomePage> {
           if (totp1 > totp2) {
             difvalor = totp1 - totp2;
             latas = difvalor / precounit2;
-            litros = latas * precoml2;
+            litros = latas.roundToDouble() * precoml2;
             totlitros = litros + totmlp2;
             diflitros = totlitros - totmlp1;
 
-            if (diflitros > 0) {
+            if (diflitros.abs() > 0) {
               _resultText1 = 'Produto 2';
-              _resultText = ('Comprando mais ' +
+              _resultText = ('Levando ' +
                   latas.toStringAsFixed(0) +
                   ' unidades do Produto 2, sairá o mesmo preço que o Produto 1. Porém levando o Produto 2 você vai ganhar ' +
-                  diflitros.toStringAsFixed(0) +
+                  diflitros.abs().toStringAsFixed(0) +
                   ' ml a mais!');
-            } else if (diflitros < 0)
+            } else if (diflitros.abs() < 0)
               _resultText = 'Pelo mesmo preço você leva ' +
                   latas.toStringAsFixed(0) +
                   ' unidades do Produto 1. Porém levando o Produto 2, você ganhará ' +
-                  diflitros.toStringAsFixed(0) +
+                  diflitros.abs().toStringAsFixed(0) +
                   ' ml a mais!';
-            else if (diflitros == 0) {
+            else if (diflitros.abs() == 0) {
               _resultText1 = 'Produto 2';
               _resultText = 'Levando ' +
                   latas.toStringAsFixed(0) +
@@ -126,21 +129,21 @@ class _HomePageState extends State<HomePage> {
           } else {
             difvalor = (totp2 - totp1);
             latas = (difvalor / precounit1);
-            litros = latas * precoml1;
+            litros = latas.roundToDouble() * precoml1;
             totlitros = litros + totmlp1;
             diflitros = totlitros - totmlp2;
 
-            if (diflitros > 0) {
-              _resultText = ('Comprando mais ' +
+            if (diflitros.abs() > 0) {
+              _resultText = ('Levando ' +
                   latas.toStringAsFixed(0) +
                   ' unidades do Produto 1, sairá o mesmo preço que o Produto 2. Porém levando o Produto 1 você vai ganhar ' +
-                  diflitros.toStringAsFixed(0) +
+                  diflitros.abs().toStringAsFixed(0) +
                   ' ml a mais!');
-            } else if (diflitros < 0)
+            } else if (diflitros.abs() < 0)
               _resultText = 'Pelo mesmo preço você leva ' +
                   latas.toStringAsFixed(0) +
                   ' unidades do Produto 2. Porém levando o Produto 1, você ganhará ' +
-                  diflitros.toStringAsFixed(0) +
+                  diflitros.abs().toStringAsFixed(0) +
                   ' ml a mais!';
             else if (diflitros == 0) {
               _resultText = 'Levando ' +
