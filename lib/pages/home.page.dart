@@ -115,25 +115,25 @@ class _HomePageState extends State<HomePage> {
             total = latas + 12;
 
             if (diflitros > 0) {
-              _resultText1 = 'Produto 2';
+              _resultText1 = 'Cerveja 2';
 
-              _resultText = ('Comprando mais ' +
+              _resultText = ('Comprando ' +
                   latas.toStringAsFixed(0) +
-                  ' unidades do Produto 2, sairá o mesmo preço que o Produto 1. Porém levando o Produto 2 você vai ganhar ' +
+                  ' unidades da Cerveja 2, sairá o mesmo preço que o Cerveja 1. Porém levando a Cerveja 2 você vai ganhar ' +
                   diflitros.toStringAsFixed(0) +
                   ' ml a mais!');
             } else if (diflitros < 0)
               _resultText = 'Pelo mesmo preço você leva ' +
                   latas.toStringAsFixed(0) +
-                  ' unidades do Produto 1. Porém levando o Produto 2, você ganhará ' +
+                  ' unidades da Cerveja 1. Porém levando a Cerveja 2, você ganhará ' +
                   diflitros.toStringAsFixed(0) +
                   ' ml a mais!';
             else if (diflitros == 0) {
-              _resultText1 = 'Produto 2';
+              _resultText1 = 'Cerveja 2';
 
               _resultText = 'Levando ' +
                   latas.toStringAsFixed(0) +
-                  ' do Produto 2, fica o mesmo preço que levar a Produto 1 e não há nenhuma diferença de ML';
+                  ' do Cerveja 2, fica o mesmo preço que levar a Cerveja 1 e não há nenhuma diferença de ML';
             }
           } else {
             difvalor = (totp2 - totp1);
@@ -150,21 +150,25 @@ class _HomePageState extends State<HomePage> {
           total = latas + 12;
 
           if (diflitros > 0) {
-            _resultText = ('Comprando mais ' +
+            _resultText1 = 'Cerveja 1';
+            _resultText = ('Comprando ' +
                 total.toStringAsFixed(0) +
-                ' unidades do Produto 1, sairá o mesmo preço que o Produto 2. Porém levando o Produto 1 você vai ganhar ' +
+                ' unidades da Cerveja 1, sairá o mesmo preço que a Cerveja 2. Porém levando a Cerveja 1 você vai ganhar ' +
                 diflitros.toStringAsFixed(0) +
                 ' ml a mais!');
+            _resultText1 = 'Cerveja 1';
           } else if (diflitros < 0)
             _resultText = 'Pelo mesmo preço você leva ' +
                 latas.toStringAsFixed(0) +
-                ' unidades do Produto 2. Porém levando o Produto 1, você ganhará ' +
+                ' unidades da Cerveja 2. Porém levando o Cerveja 1, você ganhará ' +
                 diflitros.toStringAsFixed(0) +
                 ' ml a mais!';
           else if (diflitros == 0) {
+            _resultText1 = 'Cerveja 1';
+
             _resultText = 'Levando ' +
                 latas.toStringAsFixed(0) +
-                ' unidades do Produto 1, fica o mesmo preço que levar o Produto 2 e não há nenhuma diferença de ML';
+                ' unidades da Cerveja 1, fica o mesmo preço que levar o Cerveja 2.';
           }
 
           _busy = false;
