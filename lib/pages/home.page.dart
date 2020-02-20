@@ -20,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   var _resultText = '';
   var _resultText1 = '';
 
+  double difvalor;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,12 +69,11 @@ class _HomePageState extends State<HomePage> {
           '',
         )) *
         12;
-    var real = 12;
-    var difvalor = 0.0;
     var latas = 0.0;
     var litros = 0.0;
     var totlitros = 0.0;
     var diflitros = 0.0.abs();
+    double total = 0;
     var precounit1 = int.parse(_precoCtrl.text.replaceAll(
       new RegExp(r'[,.]'),
       '',
@@ -102,57 +103,72 @@ class _HomePageState extends State<HomePage> {
         () {
           if (totp1 > totp2) {
             difvalor = totp1 - totp2;
+
             latas = difvalor / precounit2;
+
             litros = latas.roundToDouble() * precoml2;
+
             totlitros = litros + totmlp2;
+
             diflitros = totlitros - totmlp1;
 
-            if (diflitros.abs() > 0) {
+            total = latas + 12;
+
+            if (diflitros > 0) {
               _resultText1 = 'Produto 2';
-              _resultText = ('Levando ' +
+
+              _resultText = ('Comprando mais ' +
                   latas.toStringAsFixed(0) +
                   ' unidades do Produto 2, sairá o mesmo preço que o Produto 1. Porém levando o Produto 2 você vai ganhar ' +
-                  diflitros.abs().toStringAsFixed(0) +
+                  diflitros.toStringAsFixed(0) +
                   ' ml a mais!');
-            } else if (diflitros.abs() < 0)
+            } else if (diflitros < 0)
               _resultText = 'Pelo mesmo preço você leva ' +
                   latas.toStringAsFixed(0) +
                   ' unidades do Produto 1. Porém levando o Produto 2, você ganhará ' +
-                  diflitros.abs().toStringAsFixed(0) +
+                  diflitros.toStringAsFixed(0) +
                   ' ml a mais!';
-            else if (diflitros.abs() == 0) {
+            else if (diflitros == 0) {
               _resultText1 = 'Produto 2';
+
               _resultText = 'Levando ' +
                   latas.toStringAsFixed(0) +
                   ' do Produto 2, fica o mesmo preço que levar a Produto 1 e não há nenhuma diferença de ML';
             }
           } else {
             difvalor = (totp2 - totp1);
-            latas = (difvalor / precounit1);
-            litros = latas.roundToDouble() * precoml1;
-            totlitros = litros + totmlp1;
-            diflitros = totlitros - totmlp2;
 
-            if (diflitros.abs() > 0) {
-              _resultText = ('Levando ' +
-                  latas.toStringAsFixed(0) +
-                  ' unidades do Produto 1, sairá o mesmo preço que o Produto 2. Porém levando o Produto 1 você vai ganhar ' +
-                  diflitros.abs().toStringAsFixed(0) +
-                  ' ml a mais!');
-            } else if (diflitros.abs() < 0)
-              _resultText = 'Pelo mesmo preço você leva ' +
-                  latas.toStringAsFixed(0) +
-                  ' unidades do Produto 2. Porém levando o Produto 1, você ganhará ' +
-                  diflitros.abs().toStringAsFixed(0) +
-                  ' ml a mais!';
-            else if (diflitros == 0) {
-              _resultText = 'Levando ' +
-                  latas.toStringAsFixed(0) +
-                  ' unidades do Produto 1, fica o mesmo preço que levar o Produto 2 e não há nenhuma diferença de ML';
-            }
+            latas = (difvalor / precounit1);
+
+            litros = latas.roundToDouble() * precoml1;
+
+            totlitros = litros + totmlp1;
+
+            diflitros = totlitros - totmlp2;
+          }
+
+          total = latas + 12;
+
+          if (diflitros > 0) {
+            _resultText = ('Comprando mais ' +
+                total.toStringAsFixed(0) +
+                ' unidades do Produto 1, sairá o mesmo preço que o Produto 2. Porém levando o Produto 1 você vai ganhar ' +
+                diflitros.toStringAsFixed(0) +
+                ' ml a mais!');
+          } else if (diflitros < 0)
+            _resultText = 'Pelo mesmo preço você leva ' +
+                latas.toStringAsFixed(0) +
+                ' unidades do Produto 2. Porém levando o Produto 1, você ganhará ' +
+                diflitros.toStringAsFixed(0) +
+                ' ml a mais!';
+          else if (diflitros == 0) {
+            _resultText = 'Levando ' +
+                latas.toStringAsFixed(0) +
+                ' unidades do Produto 1, fica o mesmo preço que levar o Produto 2 e não há nenhuma diferença de ML';
           }
 
           _busy = false;
+
           _completed = true;
         },
       );
