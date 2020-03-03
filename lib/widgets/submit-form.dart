@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:me/widgets/input.widget.dart';
 import 'package:me/widgets/input2.widget.dart';
+import 'package:me/widgets/input_name.widget.dart';
+import 'package:me/widgets/input_name2.widget.dart';
+
 import 'package:me/widgets/loading-button.dart';
 
 class SubmitForm extends StatelessWidget {
@@ -9,14 +12,18 @@ class SubmitForm extends StatelessWidget {
   var precoCtrl1 = new MoneyMaskedTextController();
   var unitCtrl = new TextEditingController();
   var unitCtrl1 = new TextEditingController();
+  var name1ctrl = new TextEditingController();
+  var name2ctrl = new TextEditingController();
   var busy = false;
   Function submitFunc;
-  
+
   SubmitForm({
     @required this.precoCtrl,
     @required this.precoCtrl1,
     @required this.unitCtrl,
     @required this.unitCtrl1,
+    @required this.name1ctrl,
+    @required this.name2ctrl,
     @required this.busy,
     @required this.submitFunc,
   });
@@ -31,15 +38,9 @@ class SubmitForm extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Unidade 1',
-            style: TextStyle(
-              fontSize: 25,
-              color: Colors.white,
-            ),
+          SizedBox(),
+          InputName(
+            name1ctrl: name1ctrl,
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -57,18 +58,8 @@ class SubmitForm extends StatelessWidget {
               ctrl1: unitCtrl,
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Unidade 2',
-            style: TextStyle(
-              fontSize: 25,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(
-            height: 10,
+          InputName2(
+            name2ctrl: name2ctrl,
           ),
           Padding(
             padding: EdgeInsets.only(
